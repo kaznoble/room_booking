@@ -16,8 +16,8 @@
               </thead>
             @foreach($clients As $client)
               <tr>
-                <td>{{$client->title}} . {{$client->name}} {{$client->last_name}}</td>
-                <td>{{$client->email}}</td>
+                <td>{{$client->title}} . {{$client->txt_name}} {{$client->txt_last_name}}</td>
+                <td>{{$client->txt_email}}</td>
                 <td>
                   <a class="btn btn-primary" href="{{ route('show_client', ['client_id' => $client->id]) }}" >EDIT</a>
                   <a class="btn btn-info" href="{{ route('check_room', ['client_id' => $client->id]) }}" >BOOK A ROOM</a>
