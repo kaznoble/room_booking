@@ -38,17 +38,25 @@
             </thead>
             <tbody>
               @unless( empty($dateFrom) || empty($dateTo) )
-                @foreach($rooms as $room)
+                @if ( !$rooms->isEmpty() )
+                  @foreach($rooms as $room)
+                    <tr>
+                      <td>{{$room->name}}</td>
+                      <td>Available</td>
+                      <td><a class="btn btn-warning" href="{{route('book_room',
+                                                              ['client_id' => $client->id,
+                                                              'room_id' => $room->id,
+                                                              'date_in' => $dateFromBut,
+                                                              'date_out' => $dateToBut])}}" >BOOK NOW</a></td>
+                    </tr>
+                  @endforeach
+                @else
                   <tr>
-                    <td>{{$room->name}}</td>
-                    <td>Available</td>
-                    <td><a class="btn btn-warning" href="{{route('book_room',
-                                                            ['client_id' => $client->id,
-                                                            'room_id' => $room->id,
-                                                            'date_in' => $dateFromBut,
-                                                            'date_out' => $dateToBut])}}" >BOOK NOW</a></td>
+                    <td><span class="alert alert-warning">Not Available</span></td>
+                    <td><span class="alert alert-warning">Not Available</span></td>
+                    <td><a class="btn btn-secondary" disabled="disabled" >BOOK NOW</a></td>
                   </tr>
-                @endforeach
+                @endif
               @endunless
             </tbody>
           </table>

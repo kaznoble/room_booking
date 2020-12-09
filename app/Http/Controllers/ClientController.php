@@ -87,14 +87,6 @@ class ClientController extends Controller
 		return view('client/newClient',$data);
 	}
 
-	/*public function modify($client_id)
-	{
-		$data = [];
-		$data['titles'] = $this->titles;
-		$data['modify'] = 1;
-		return view('client/newClient', $data);
-	}*/
-
 	public function modify(Request $request, $client_id, Client $client)
 	{
 		$data = [];

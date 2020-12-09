@@ -5,8 +5,8 @@
       <label>Title</label>
       <select name="title" class="form-control">
         <option value="">--select--</option>
-        @foreach($titles as $title)
-          <option value="{{$title}}" >{{$title}}.</option>
+        @foreach($titles as $titl)
+          <option value="{{$titl}}" {{$title == $titl ? 'selected' : ''}} >{{$titl}}.</option>
         @endforeach
       </select>
     </div>
