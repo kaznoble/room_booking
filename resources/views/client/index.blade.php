@@ -8,6 +8,7 @@
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
           <a href="{{route('new_client')}}" class="btn btn-primary" >New Client</a>
+          <a href="{{route('new_room')}}" class="btn btn-primary" >New Room</a>
           <table class="table table-striped mt-3" >
               <thead>
                 <th>Name</th>
