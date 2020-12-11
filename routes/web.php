@@ -24,5 +24,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
   Route::get('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
   Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms');
 
+  Route::get('/rooms', 'RoomsController@index')->name('rooms');
+  Route::get('/newroom', 'RoomsController@newRoom')->name('new_room');
+  Route::post('/newroom', 'RoomsController@newRoom')->name('create_room');
+  Route::get('/room/{room_id}', 'RoomsController@modifyRoom')->name('modify_room');
+  Route::post('/room/{room_id}', 'RoomsController@modifyRoom')->name('modify_room');
+
+  Route::get('/comment/{id}', 'CommentsController@edit')->name('edit_comment');
+  Route::post('/comment/{id}', 'CommentsController@update')->name('modify_comment');
+  Route::post('/comment/room/{room_id}', 'CommentsController@store')->name('store_comment');      
+
   Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom')->name('book_room');
 });

@@ -13,12 +13,19 @@
               <thead>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Reservations</th>
                 <th>Action</th>
               </thead>
             @foreach($clients As $client)
               <tr>
                 <td>{{$client->title}} . {{$client->txt_name}} {{$client->txt_last_name}}</td>
                 <td>{{$client->txt_email}}</td>
+                <td>{{$client->date_in}}
+                  @foreach ($client->reservations As $res)
+                    <strong>Date In:</strong> {{ $res->date_in }}<br />
+                    <strong>Date Out:</strong> {{ $res->date_out }}<br /><br />
+                  @endforeach
+                </td>
                 <td>
                   <a class="btn btn-primary" href="{{ route('show_client', ['client_id' => $client->id]) }}" >EDIT</a>
                   <a class="btn btn-info" href="{{ route('check_room', ['client_id' => $client->id]) }}" >BOOK A ROOM</a>

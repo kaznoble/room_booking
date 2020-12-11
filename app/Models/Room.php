@@ -10,6 +10,11 @@ class Room extends Model
 {
     use HasFactory;
 
+    public function comments()
+    {
+      return $this->hasOne('App\Models\Comments','room_id');
+    }
+
     public function getAvailablerooms($start_date, $end_date)
     {
       $available_rooms = DB::table('rooms as r')

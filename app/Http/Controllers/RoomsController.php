@@ -48,6 +48,9 @@ class RoomsController extends Controller
 			return redirect('rooms');
 		}
 
+		// Preset values
+		$data['comment_id'] = '';
+		$data['comment'] = '';
 		$data['modify'] = 0;
 		return view('rooms/new', $data);
 	}
@@ -56,7 +59,7 @@ class RoomsController extends Controller
 		$data = [];
 
 		$data = $this->room->find($room_id);
-		$comment_data = $comments->find($room_id);
+		$comment_data = $this->room->find($room_id)->comments;
 		$data['comment_id'] = $comment_data['id'];
 		$data['comment'] = $comment_data['comment'];
 

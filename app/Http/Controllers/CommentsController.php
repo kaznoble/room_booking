@@ -9,7 +9,7 @@ class CommentsController extends Controller
 {
     public function __construct(Comments $comments)
   	{
-  		$this->room = $comments;
+  		$this->comment = $comments;
   	}
 
     /**
@@ -27,7 +27,7 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -38,9 +38,24 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($room_id, Request $request)
     {
         //
+        $data = [];
+
+        if ( $request->isMethod('POST') ) {
+          $this->validate(
+    				$request,
+    				[
+    					'comment' => 'required',
+    				]
+    			);
+
+          $data['comment'] = $request->input('comment');
+          $data['room_id'] = $room_id;
+          $this->comment->insert($data);
+          return redirect('/room/' . $room_id);
+        }
     }
 
     /**
@@ -77,7 +92,7 @@ class CommentsController extends Controller
         //
         $data = [];
 
-        $comment_data = $this->room->find($id);
+        $comment_data = $this->comment->find($id);
 
         if ($request->isMethod('post') )
         {

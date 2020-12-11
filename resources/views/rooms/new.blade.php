@@ -35,20 +35,23 @@
             </div>
           </form>
 
-          <form name="frm_comments" method="POST" action="/comment/{{ $comment_id }}" class="mt-5" >
-            @csrf
-            <h4>{{ __('Comments') }}</h4>
-            <div class="row mt-4" >
-              <div class="col-md-6" >
-                <textarea name="comment" class="form-control" >{{ $comment }}</textarea>
+          @unless( $modify == 0 )
+            <form name="frm_comments" method="POST" action="/comment/{{ $comment_id ? $comment_id : 'room/' . $id }}" class="mt-5" >
+              @csrf
+              <h4>{{ __('Comments') }}</h4>
+              <div class="row mt-4" >
+                <div class="col-md-6" >
+                  <textarea name="comment" class="form-control" >{{ $comment ? $comment : '' }}</textarea>
+                  <small class="error" >{{ $errors->first('comment') }}</small>
+                </div>
               </div>
-            </div>
-            <div class="row mt-4" >
-              <div class="col-md-6" >
-                <button type="submit" name="but_comment" class="btn btn-primary" >SAVE</button>
+              <div class="row mt-4" >
+                <div class="col-md-6" >
+                  <button type="submit" name="but_comment" class="btn btn-primary" >SAVE</button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          @endunless
 
         </div>
       </div>
