@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Title As Title;
 use App\Models\Client As Client;
+use App\Models\Notes As Notes;
 
 class ClientController extends Controller
 {

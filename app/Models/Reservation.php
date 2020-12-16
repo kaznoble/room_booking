@@ -18,4 +18,9 @@ class Reservation extends Model
     {
       return $this->belongsTo('App\Models\Room','room_id','id');
     }
+
+    public function note()
+    {
+      return $this->hasOne('App\Models\Notes');
+    }
 }

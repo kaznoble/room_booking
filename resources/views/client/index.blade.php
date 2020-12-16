@@ -31,6 +31,11 @@
                   @foreach ($client->reservations As $res)
                     <strong>Date In:</strong> {{ $res->date_in }}<br />
                     <strong>Date Out:</strong> {{ $res->date_out }}<br />
+                    <form id="frm_note" method="POST" action="{{ route('edit_note', ['res_id' => $res->id]) }}" >
+                      @csrf
+                      <textarea name="txt_note" class="form-control" >{{ $res->note->note }}</textarea>
+                      <button name="butt_note_save" class="btn btn-secondary mt-2" type="submit" >SAVE</button>
+                    </form>
                     <form id="form_cancel_res" action="{{ route('cancel_reservation',['res_id' => $res->id]) }}" method="POST" >
                       @csrf
                       <input type="hidden" name="_method" value="DELETE" />

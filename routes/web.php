@@ -27,6 +27,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
   Route::delete('/reservations/{res_id}', 'ReservationsController@cancelReservation')->name('cancel_reservation');
 
+  Route::post('/notes/{res_id}', 'NotesController@update')->name('edit_note');
+
   Route::get('/rooms', 'RoomsController@index')->name('rooms');
   Route::get('/newroom', 'RoomsController@newRoom')->name('new_room');
   Route::post('/newroom', 'RoomsController@newRoom')->name('create_room');
