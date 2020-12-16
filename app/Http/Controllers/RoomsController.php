@@ -26,7 +26,8 @@ class RoomsController extends Controller
 		return view('rooms/index', $data);
 	}
 
-	public function newRoom(Request $request, Room $rooms) {
+	public function newRoom(Request $request, Room $rooms)
+	{
 		$data = [];
 
 		$data['name'] = $request->input('name');
@@ -45,17 +46,18 @@ class RoomsController extends Controller
 			);
 
 			$rooms->insert($data);
-			return redirect('rooms');
+			return redirect('rooms')->with('message','New room has been successfully!');
 		}
 
 		// Preset values
 		$data['comment_id'] = '';
 		$data['comment'] = '';
 		$data['modify'] = 0;
-		return view('rooms/new', $data);
+		return view('rooms/new', $data)->with('message','New room has been successfully!');
 	}
 
-	public function modifyRoom(Request $request, $room_id, Room $rooms, Comments $comments) {
+	public function modifyRoom(Request $request, $room_id, Room $rooms, Comments $comments)
+	{
 		$data = [];
 
 		$data = $this->room->find($room_id);
@@ -75,18 +77,22 @@ class RoomsController extends Controller
 			);
 
 			$room_data = $this->room->find($room_id);
-
 			$room_data->name = $request->input('name');
 			$room_data->floor = $request->input('floor');
 			$room_data->description = $request->input('description');
-
 			$room_data->save();
-
-			return redirect('rooms');
+			return redirect('rooms')->with('message','Modify has been successfully!');
 		}
 
 		$data['modify'] = 1;
 		return view('rooms/new', $data);
+	}
+
+	public function deleteRoom($room_id)
+	{
+		$room = $this->room->find($room_id);
+		$room->delete();
+		return redirect('rooms')->with('message','Delete has been successfully!');
 	}
 
 	public function checkAvailableRooms($client_id, Request $request)

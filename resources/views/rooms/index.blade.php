@@ -8,6 +8,13 @@
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
           <div class="row" >
+            <div class="col-md-12" >
+              @unless ( empty(Session::get('message')) )
+                <div class="alert alert-primary">{{ Session::get('message') }}</div>
+              @endunless
+            </div>
+          </div>
+          <div class="row" >
             <div class="col-md-4">
               <a href="{{route('new_room')}}" class="btn btn-primary" />NEW ROOM</a>
             </div>
@@ -26,7 +33,14 @@
                     <td>{{ $room->name }}</td>
                     <td>{{ $room->floor }}</td>
                     <td>{{ $room->description }}</td>
-                    <td><a class="btn btn-secondary"  href="{{ route('modify_room', ['room_id' => $room->id]) }}" >EDIT</a></td>
+                    <td>
+                      <a class="btn btn-secondary"  href="{{ route('modify_room', ['room_id' => $room->id]) }}" >EDIT</a>
+                      <form id="form_delete_room" class="mt-3" method="POST" action="{{ route('delete_room', ['room_id' => $room->id]) }}" >
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button class="btn btn-warning" >DELETE</button>
+                      </form>
+                    </td>
                   </tr>
                 @endforeach
               @else

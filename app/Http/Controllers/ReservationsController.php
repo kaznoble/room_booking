@@ -11,6 +11,11 @@ use App\Models\Reservation As Reservation;
 class ReservationsController extends Controller
 {
     //
+	public function __construct()
+	{
+		$this->reservation = new Reservation();
+	}
+
 	public function bookRoom($client_id, $room_id, $date_in, $date_out)
 	{
 		$reservation = new Reservation();
@@ -32,5 +37,12 @@ class ReservationsController extends Controller
 
 		return redirect()->route('clients');;
 		//return view('reservations/bookRome');
+	}
+
+	public function cancelReservation($res_id)
+	{
+		$reservation = $this->reservation->find($res_id);
+		$reservation->delete();
+		return redirect('clients')->with('message','Cancel has been successfully!');
 	}
 }

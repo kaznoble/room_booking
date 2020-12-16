@@ -138,4 +138,11 @@ class ClientController extends Controller
 		return view('client/newClient',$data);
 	}
 
+	public function delete($client_id)
+	{
+		$client = $this->client->find($client_id);
+		$client->delete();
+		return redirect('clients');
+	}
+
 }
